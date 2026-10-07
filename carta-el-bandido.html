@@ -1,0 +1,2083 @@
+?<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>Carta · El Bandido</title>
+  <style>
+    :root {
+      --verde: #c8a24d;
+      --verde-claro: #8a7a52;
+      --crema: #121212;
+      --oro: #d4af37;
+      --tinta: #f2e9d8;
+      --foto-fondo: url('');
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #0a0a0a;
+      color: var(--tinta);
+      line-height: 1.55;
+      padding: 24px;
+    }
+
+    /* ===== HEADER ELEGANTE ===== */
+    .header {
+      max-width: 760px;
+      margin: 0 auto 24px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      text-align: center;
+      background: linear-gradient(to bottom, #0a0a0a 82%, rgba(10, 10, 10, 0));
+      padding: 18px 0 12px;
+      transition: padding 0.3s ease;
+    }
+
+    .header__actual {
+      display: block;
+      font-family: 'Trebuchet MS', sans-serif;
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--oro);
+      opacity: 0.9;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .header__actual--cambia {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+
+    .header--compacto {
+      padding: 8px 0 6px;
+      background: linear-gradient(to bottom, #0a0a0a 94%, rgba(10, 10, 10, 0));
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.55);
+    }
+
+    .header__logo {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      width: 74px;
+      height: 74px;
+      padding: 4px;
+      background: #121212;
+      border: 1px solid var(--oro);
+      border-radius: 50%;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+      transition: width 0.3s ease, height 0.3s ease, top 0.3s ease, left 0.3s ease, margin 0.3s ease;
+    }
+
+    .header--compacto .header__logo {
+      width: 42px;
+      height: 42px;
+      top: 7px;
+      left: 7px;
+    }
+
+    .header__logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .header__enlace-mapa {
+      color: var(--oro);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--verde-claro);
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .header__enlace-mapa:hover {
+      color: var(--tinta);
+      border-color: var(--oro);
+    }
+
+    .header__marca {
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .header__marca-nombre {
+      font-size: 30px;
+      font-weight: normal;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--oro);
+      transition: font-size 0.3s ease, letter-spacing 0.3s ease;
+    }
+
+    .header__marca-nombre small {
+      display: block;
+      font-family: 'Trebuchet MS', sans-serif;
+      font-size: 9px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--verde-claro);
+      margin-top: 2px;
+      transition: opacity 0.25s ease;
+    }
+
+    .header--compacto .header__marca-nombre {
+      font-size: 20px;
+      letter-spacing: 4px;
+    }
+
+    .header--compacto .header__marca-nombre small {
+      display: none;
+    }
+
+    .header__linea {
+      width: 150px;
+      height: 1px;
+      margin: 14px auto 12px;
+      background: linear-gradient(to right, transparent, var(--oro), transparent);
+      transition: margin 0.3s ease, opacity 0.25s ease;
+    }
+
+    .header--compacto .header__linea {
+      margin: 6px auto 4px;
+      opacity: 0.5;
+    }
+
+    .header--compacto .header__actual {
+      margin-bottom: 4px;
+    }
+
+    .header__nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .header__nav a {
+      font-family: 'Trebuchet MS', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #c9c2b2;
+      padding: 6px 12px;
+      position: relative;
+      transition: color 0.2s ease;
+    }
+
+    .header__nav a::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 2px;
+      width: 0;
+      height: 1px;
+      background: var(--oro);
+      transform: translateX(-50%);
+      transition: width 0.25s ease;
+    }
+
+    .header__nav a:hover {
+      color: var(--oro);
+    }
+
+    .header__nav a:hover::after {
+      width: 55%;
+    }
+
+    .header__nav a.nav-activo {
+      color: var(--oro);
+    }
+
+    .header__nav a.nav-activo::after {
+      width: 55%;
+      background: var(--oro);
+    }
+
+    .header--compacto .header__nav a {
+      font-size: 10px;
+      padding: 4px 9px;
+      letter-spacing: 1.5px;
+    }
+
+    .header--compacto .header__nav .nav-reserva {
+      font-size: 10px;
+      padding: 4px 11px;
+      letter-spacing: 1.5px;
+      margin-left: 6px;
+    }
+
+    .header__nav .nav-reserva {
+      font-family: 'Trebuchet MS', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--oro);
+      background: transparent;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      border-radius: 30px;
+      padding: 6px 14px;
+      margin-left: 10px;
+      cursor: pointer;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .header__nav .nav-reserva:hover {
+      background: rgba(212, 175, 55, 0.12);
+      box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.4);
+    }
+
+    .header__nav a + a::before {
+      content: '·';
+      color: var(--verde-claro);
+      opacity: 0.45;
+    }
+
+    /* ===== CARTA ===== */
+    .carta {
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--crema);
+      border: 3px double var(--verde-claro);
+      border-radius: 12px;
+      padding: 32px 40px 36px;
+      position: relative;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .carta::before,
+    .carta::after {
+      content: '';
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      height: 1px;
+      background: var(--oro);
+    }
+
+    .carta::before { top: 10px; }
+    .carta::after { bottom: 10px; }
+
+    .marco-titulo {
+      text-align: center;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 4px 0 18px;
+      margin-bottom: 20px;
+    }
+
+    .marco-titulo p {
+      font-family: 'Georgia', serif;
+      font-size: 20px;
+      font-style: italic;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--oro);
+      margin-bottom: 0;
+    }
+
+    .marco-titulo h1 {
+      font-size: 38px;
+      font-weight: normal;
+      letter-spacing: 4px;
+      color: var(--oro);
+      text-transform: uppercase;
+    }
+
+    .marco-titulo h2 {
+      font-size: 13px;
+      font-style: italic;
+      font-weight: normal;
+      color: var(--verde-claro);
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    .seccion {
+      margin-bottom: 42px;
+      padding-bottom: 44px;
+      border-bottom: 1px solid rgba(138, 122, 82, 0.28);
+      scroll-margin-top: 110px;
+      position: relative;
+    }
+
+    .seccion::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--oro), transparent);
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.7s ease;
+    }
+
+    .seccion--activa::after {
+      transform: scaleX(1);
+    }
+
+    .seccion:last-of-type {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .seccion-titulo {
+      font-family: 'Georgia', serif;
+      font-size: 14px;
+      font-style: italic;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--oro);
+      text-align: center;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .seccion-titulo::before,
+    .seccion-titulo::after {
+      content: '';
+      display: inline-block;
+      vertical-align: middle;
+      width: 64px;
+      height: 1px;
+      margin: 0 14px;
+    }
+
+    .seccion-titulo::before {
+      background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.55));
+    }
+
+    .seccion-titulo::after {
+      background: linear-gradient(to left, transparent, rgba(212, 175, 55, 0.55));
+    }
+
+    .plato {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .plato .info {
+      flex: 1;
+    }
+
+    .plato .nombre {
+      font-size: 15px;
+      font-weight: bold;
+      color: var(--tinta);
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .plato .puntos {
+      flex: 1;
+      border-bottom: 1px solid rgba(138, 122, 82, 0.4);
+      height: 0;
+    }
+
+    .plato .descripcion {
+      font-size: 13px;
+      font-style: italic;
+      color: #b3a98f;
+      margin-top: 3px;
+    }
+
+    .plato .precio {
+      font-size: 15px;
+      font-weight: bold;
+      color: var(--oro);
+      white-space: nowrap;
+    }
+
+    .plato--foto {
+      align-items: center;
+    }
+
+    .plato__img {
+      flex: 0 0 140px;
+      width: 140px;
+      height: 96px;
+      padding: 5px;
+      background: #201c13;
+      border: 1px solid var(--oro);
+      border-radius: 14px;
+      box-shadow:
+        inset 0 0 0 1px #17140d,
+        inset 0 0 0 3px rgba(212, 175, 55, 0.28),
+        0 10px 22px rgba(0, 0, 0, 0.5);
+      transform: rotate(-1.4deg);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+    }
+
+    .plato__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 9px;
+      display: block;
+      filter: saturate(0.95);
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .plato--foto:hover .plato__img {
+      transform: rotate(0deg);
+      box-shadow:
+        inset 0 0 0 1px #17140d,
+        inset 0 0 0 3px rgba(212, 175, 55, 0.45),
+        0 14px 26px rgba(0, 0, 0, 0.6);
+    }
+
+    .plato--foto:hover .plato__img img {
+      transform: scale(1.05);
+      filter: saturate(1.1);
+    }
+
+    .destacado {
+      color: var(--tinta);
+      text-align: center;
+      padding: 30px 10px 26px;
+      border-top: 1px solid rgba(212, 175, 55, 0.22);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.22);
+    }
+
+    .destacado .seccion-titulo {
+      color: var(--oro);
+      margin-bottom: 10px;
+    }
+
+    .destacado .seccion-titulo::before,
+    .destacado .seccion-titulo::after {
+      display: none;
+    }
+
+    .destacado .subtitulo {
+      font-family: 'Trebuchet MS', sans-serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--verde-claro);
+      margin: 16px 0 6px;
+    }
+
+    .destacado .cuerpo {
+      font-size: 13.5px;
+      font-style: italic;
+      color: #d6cbb0;
+      line-height: 1.7;
+    }
+
+    .precio-grande {
+      font-family: 'Georgia', serif;
+      font-size: 22px;
+      font-style: italic;
+      letter-spacing: 1px;
+      color: var(--oro);
+      display: block;
+      margin-top: 6px;
+    }
+
+    .aviso {
+      text-align: center;
+      font-size: 12px;
+      font-style: italic;
+      color: #8a7a52;
+      margin: 6px 0 0;
+    }
+
+    .reserva__mapa {
+      max-width: 640px;
+      margin: 0 auto 26px;
+      padding: 6px;
+      background: #201c13;
+      border: 1px solid var(--verde-claro);
+      border-radius: 14px;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .reserva__mapa iframe {
+      width: 100%;
+      height: 340px;
+      border: 0;
+      border-radius: 9px;
+      display: block;
+      filter: grayscale(0.4) contrast(1.05);
+    }
+
+    .reserva__info {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .reserva__horario-titulo {
+      font-family: 'Trebuchet MS', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--verde-claro);
+      margin-bottom: 8px;
+    }
+
+    .reserva__horario {
+      font-family: 'Georgia', serif;
+      font-size: 24px;
+      font-style: italic;
+      letter-spacing: 2px;
+      color: var(--oro);
+      margin-bottom: 10px;
+    }
+
+    .reserva__dir {
+      font-size: 13px;
+      font-style: italic;
+      color: #b3a98f;
+    }
+
+    /* ===== MODAL RESERVAS ===== */
+    .modal-reservas {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(5, 5, 5, 0.85);
+      backdrop-filter: blur(6px);
+    }
+
+    .modal-reservas--abierto {
+      display: flex;
+    }
+
+    .modal-reservas__caja {
+      position: relative;
+      width: 100%;
+      max-width: 720px;
+      background: #121212;
+      border: 1px solid var(--oro);
+      border-radius: 16px;
+      padding: 36px;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7);
+      animation: modalEntrada 0.35s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    @keyframes modalEntrada {
+      from { opacity: 0; transform: translateY(18px) scale(0.97); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .modal-reservas__cerrar {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--verde-claro);
+      background: transparent;
+      color: var(--oro);
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .modal-reservas__cerrar:hover {
+      background: rgba(212, 175, 55, 0.12);
+      border-color: var(--oro);
+    }
+
+    .boton-reservar {
+      display: block;
+      width: 100%;
+      margin-top: 24px;
+      padding: 13px 18px;
+      font-family: 'Trebuchet MS', sans-serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #121212;
+      background: linear-gradient(180deg, #e6c56a, var(--oro));
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: filter 0.2s ease, transform 0.2s ease;
+    }
+
+    .boton-reservar:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    .boton-reservar--enlace {
+      display: block;
+      margin-top: 20px;
+      padding: 13px 18px;
+      font-family: 'Trebuchet MS', sans-serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-align: center;
+      text-decoration: none;
+      color: #121212;
+      background: linear-gradient(180deg, #e6c56a, var(--oro));
+      border-radius: 30px;
+    }
+
+    .reserva-form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .reserva-form__fila {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .campo {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .reserva-form label {
+      display: block;
+      text-align: left;
+      font-family: 'Trebuchet MS', sans-serif;
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--verde-claro);
+    }
+
+    .reserva-form input,
+    .reserva-form select {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      margin: 0;
+      padding: 12px;
+      font-family: 'Georgia', serif;
+      font-size: 16px;
+      line-height: 1.2;
+      color: var(--tinta);
+      background: #1a1a1a;
+      border: 1px solid var(--verde-claro);
+      border-radius: 8px;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      text-align: left;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .reserva-form input:focus,
+    .reserva-form select:focus {
+      border-color: var(--oro);
+      box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+    }
+
+    .reserva-form select {
+      padding-right: 36px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23d4af37' stroke-width='1.5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 13px center;
+      background-size: 11px 8px;
+    }
+
+    .reserva-form input::placeholder {
+      color: #7d7566;
+    }
+
+    .reserva-form .boton-reservar {
+      margin-top: 6px;
+    }
+
+    .reserva-exito {
+      text-align: center;
+      padding: 14px 0 6px;
+    }
+
+    .nota-incluye {
+      text-align: center;
+      font-family: 'Trebuchet MS', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--oro);
+      border-top: 1px solid var(--verde-claro);
+      padding-top: 16px;
+      margin-top: 22px;
+    }
+
+    .nota-incluye--banda {
+      column-span: all;
+      margin: 8px 0 34px;
+      padding: 0;
+      border: none;
+      background: none;
+      text-align: center;
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      font-weight: normal;
+      font-size: 19px;
+      letter-spacing: 0.5px;
+      text-transform: none;
+      color: var(--oro);
+      transform: rotate(-0.6deg);
+    }
+
+    .nota-incluye--banda::before,
+    .nota-incluye--banda::after {
+      content: '❦';
+      display: inline-block;
+      vertical-align: middle;
+      color: var(--verde-claro);
+      font-size: 14px;
+      margin: 0 16px;
+    }
+
+    .subtitulo-doble {
+      font-family: 'Trebuchet MS', sans-serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--oro);
+      text-align: center;
+      margin: 26px 0 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--verde-claro);
+      column-span: all;
+    }
+
+    .inicio-hero {
+      text-align: center;
+    }
+
+    .inicio-hero__cabeza {
+      margin-bottom: 10px;
+    }
+
+    .inicio-hero__cabeza p {
+      font-family: 'Trebuchet MS', sans-serif;
+      font-size: 11px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--oro);
+      margin-bottom: 8px;
+    }
+
+    .inicio-hero__cabeza h2 {
+      font-size: 36px;
+      font-weight: normal;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      color: var(--oro);
+    }
+
+    .quienes-somos {
+      max-width: 620px;
+      margin: 22px auto 0;
+      text-align: center;
+    }
+
+    .quienes-somos p {
+      font-size: 15px;
+      font-style: italic;
+      color: #e6dcc4;
+      line-height: 1.8;
+    }
+
+    .quienes-somos strong {
+      color: var(--oro);
+      font-style: normal;
+    }
+
+    .galeria {
+      max-width: 740px;
+      margin: 42px auto 0;
+      column-count: 3;
+      column-gap: 20px;
+    }
+
+    .galeria figure {
+      margin: 0 0 20px;
+      break-inside: avoid;
+      padding: 6px;
+      background: rgba(18, 18, 18, 0.55);
+      border: 1px solid rgba(212, 175, 55, 0.22);
+      border-radius: 20px;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+      transition: transform 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease;
+    }
+
+    .galeria figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 15px;
+      filter: saturate(0.9);
+      transition: transform 0.5s ease, filter 0.5s ease;
+    }
+
+    .galeria .foto--ancha {
+      column-span: all;
+      margin-bottom: 28px;
+      padding: 8px;
+    }
+
+    .galeria .foto--ancha img {
+      border-radius: 17px;
+    }
+
+    .galeria figure:nth-child(odd) {
+      transform: rotate(-0.7deg);
+    }
+
+    .galeria figure:nth-child(even) {
+      transform: rotate(0.6deg);
+    }
+
+    .galeria figure:nth-child(3n) {
+      margin-top: 16px;
+    }
+
+    .galeria figure:hover {
+      transform: rotate(0deg) translateY(-3px);
+      border-color: rgba(212, 175, 55, 0.5);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .galeria figure:hover img {
+      transform: scale(1.04);
+      filter: saturate(1.05);
+    }
+
+    .menudia {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .menudia .destacado {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .pie {
+      text-align: center;
+      border-top: 1px solid var(--verde-claro);
+      padding-top: 18px;
+      margin-top: 8px;
+    }
+
+    .pie p {
+      font-family: 'Trebuchet MS', sans-serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--oro);
+      margin-top: 6px;
+    }
+
+    .pie__direccion {
+      font-family: 'Georgia', serif !important;
+      font-style: italic;
+      font-size: 12px !important;
+      letter-spacing: 1px !important;
+      text-transform: none !important;
+      color: var(--verde-claro) !important;
+      margin-top: 12px !important;
+    }
+
+    .pie__direccion a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dotted var(--verde-claro);
+      padding-bottom: 1px;
+      white-space: nowrap;
+    }
+
+    .pie__direccion a:hover {
+      color: var(--oro) !important;
+    }
+
+    @media (min-width: 700px) {
+      .seccion:not(.inicio-hero):not(#reservas) {
+        column-count: 2;
+        column-gap: 52px;
+        column-rule: 1px solid rgba(138, 122, 82, 0.16);
+      }
+
+      .seccion:not(.inicio-hero):not(#reservas) .seccion-titulo {
+        column-span: all;
+      }
+
+      .nota-incluye {
+        column-span: all;
+      }
+
+      .plato {
+        break-inside: avoid;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .header { padding: 14px 8px 10px; }
+      .header__logo {
+        position: static;
+        display: block;
+        width: 58px;
+        height: 58px;
+        margin: 0 auto 8px;
+      }
+      .header__marca-nombre { font-size: 24px; letter-spacing: 3px; }
+      .header__marca-nombre small { letter-spacing: 3px; line-height: 1.7; }
+      .header__nav { gap: 0; }
+      .header__nav a { padding: 6px 8px; letter-spacing: 1.5px; }
+      .header__linea { margin-top: 10px; }
+      .seccion-titulo::before,
+      .seccion-titulo::after { display: none; }
+      .quienes-somos { padding: 0 10px; }
+      .galeria {
+        column-count: 2;
+        column-gap: 12px;
+        margin-top: 28px;
+      }
+      .galeria figure { margin-bottom: 12px; padding: 4px; border-radius: 16px; }
+      .galeria figure img { border-radius: 12px; }
+      .galeria figure:nth-child(3n) { margin-top: 0; }
+      .galeria .foto--ancha { margin-bottom: 16px; padding: 5px; }
+      .seccion { scroll-margin-top: 150px; }
+      .menudia { grid-template-columns: 1fr; }
+      .inicio-hero__cabeza h2 { font-size: 28px; letter-spacing: 5px; }
+      .modal-reservas {
+        padding: 10px;
+        align-items: flex-start;
+      }
+      .modal-reservas__caja {
+        margin: auto 0;
+        padding: 30px 18px 22px;
+        border-radius: 14px;
+        max-height: 94vh;
+      }
+      .modal-reservas__cerrar {
+        top: 10px;
+        right: 10px;
+        width: 34px;
+        height: 34px;
+        font-size: 20px;
+      }
+      .reserva-form { gap: 16px; }
+      .reserva-form__fila { grid-template-columns: 1fr; gap: 16px; }
+      .boton-reservar { padding: 15px 16px; letter-spacing: 2px; }
+      .reserva__horario { font-size: 21px; }
+      .reserva__mapa { margin-bottom: 20px; padding: 5px; border-radius: 12px; }
+      .reserva__mapa iframe { height: 220px; border-radius: 8px; }
+    }
+
+    @media print {
+      body { padding: 0; background: #fff; }
+      .header { display: none; }
+      .carta { box-shadow: none; max-width: 100%; }
+      .seccion { column-count: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header elegante -->
+  <header class="header">
+    <span class="header__logo">
+      <img src="fotos/logo.jpg" alt="Logo de El Bandido" />
+    </span>
+    <a class="header__marca" href="#inicio">
+      <span class="header__marca-nombre">
+        El Bandido
+        <small>Bar &amp; Restaurant</small>
+      </span>
+    </a>
+    <div class="header__linea"></div>
+    <span class="header__actual" id="seccionActual" aria-live="polite">Inicio</span>
+    <nav class="header__nav" aria-label="Navegación de la carta">
+      <a href="#inicio">Inicio</a>
+      <a href="#sandwiches">Sándwiches</a>
+      <a href="#alopobre">A lo Pobre</a>
+      <a href="#especiales">Especiales</a>
+      <a href="#ceviche">Ceviche</a>
+      <a href="#ensaladas">Ensaladas</a>
+      <a href="#compartir">Para Compartir</a>
+      <a href="#postres">Postres</a>
+      <a href="#bebestibles">Bebestibles</a>
+      <button type="button" class="nav-reserva" id="abrirReservas">Reservas</button>
+    </nav>
+  </header>
+
+  <main class="carta">
+    <!-- INICIO: MEN�s DEL DÍA -->
+    <section id="inicio" class="seccion inicio-hero">
+      <div class="inicio-hero__cabeza">
+        <h2>Bienvenidos</h2>
+      </div>
+
+      <div class="quienes-somos">
+        <h3 class="seccion-titulo">¿Quiénes Somos?</h3>
+        <p>
+          Somos un restaurante familiar de <strong>comida casera</strong>, ubicado en el
+          corazón del casco histórico de la ciudad de <strong>La Serena</strong>. Aquí tu
+          paladar viajará a los sabores más queridos de tu niñez: recetas de toda la vida,
+          cocinadas con cariño y los ingredientes más frescos. Un espacio cálido donde cada
+          plato se sirve como en casa�?� porque lo nuestro es recibirte como familia.
+        </p>
+      </div>
+
+      <div class="galeria">
+        <figure class="foto--ancha">
+          <img src="fotos/g8.jpeg" alt="El Bandido" />
+        </figure>
+        <figure>
+          <img src="fotos/g2.jpeg" alt="Detalle de un plato" />
+        </figure>
+        <figure>
+          <img src="fotos/g3.jpeg" alt="Nuestro local" />
+        </figure>
+        <figure>
+          <img src="fotos/g1.jpeg" alt="Nuestra cocina" />
+        </figure>
+        <figure>
+          <img src="fotos/g4.jpeg" alt="Nuestros platos" />
+        </figure>
+        <figure>
+          <img src="fotos/g6.jpeg" alt="Un plato de la casa" />
+        </figure>
+        <figure>
+          <img src="fotos/g7.jpeg" alt="Tabla de productos" />
+        </figure>
+      </div>
+
+      <div class="menudia">
+        <div class="destacado">
+          <h3 class="seccion-titulo">Entrada + Plato de Fondo</h3>
+          <span class="precio precio-grande">$7.990</span>
+          <p class="subtitulo">Entradas</p>
+          <p class="cuerpo">Consomé &nbsp;·&nbsp; Ensalada chilena</p>
+          <p class="subtitulo">Fondos</p>
+          <p class="cuerpo">
+            Pescado frito c/ 1 agregado &nbsp;·&nbsp; Tallarines boloñesa, mix o champiñón
+            &nbsp;·&nbsp; Ensalada césar &nbsp;·&nbsp; Legumbre del día
+          </p>
+        </div>
+        <div class="destacado">
+          <h3 class="seccion-titulo">Plato del Día</h3>
+          <p class="cuerpo">Proteína del día con dos agregados</p>
+          <span class="precio precio-grande">$8.990</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SÁNDWICHES -->
+    <section id="sandwiches" class="seccion">
+      <h3 class="seccion-titulo">Sándwiches</h3>
+      <p class="nota-incluye nota-incluye--banda">Todos los sándwiches incluyen porción de papas naturales</p>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">El Bandido<span class="puntos"></span></div>
+          <div class="descripcion">Carne, queso, tocino y cebolla</div>
+        </div>
+        <div class="precio">$8.990</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">La Bandida<span class="puntos"></span></div>
+          <div class="descripcion">Pollo, morrón, queso cheddar, tomate y tocino</div>
+        </div>
+        <div class="precio">$8.990</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Churrasco italiano<span class="puntos"></span></div>
+          <div class="descripcion">Carne, tomate, palta y mayo</div>
+        </div>
+        <div class="precio">$6.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Churrasco barros luco<span class="puntos"></span></div>
+          <div class="descripcion">Carne y queso fundido</div>
+        </div>
+        <div class="precio">$6.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Churrasco chacarero<span class="puntos"></span></div>
+          <div class="descripcion">Carne, tomate, porotos verdes, ají verde y mayo</div>
+        </div>
+        <div class="precio">$8.990</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Prestige<span class="puntos"></span></div>
+          <div class="descripcion">Carne, tocino, palta, queso cheddar, ají verde y cebolla caramelizada</div>
+        </div>
+        <div class="precio">$8.990</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Sándwich de pescado<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$6.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Ave palta mayo<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$6.900</div>
+      </div>
+    </section>
+
+    <!-- A LO POBRE -->
+    <section id="alopobre" class="seccion">
+      <h3 class="seccion-titulo">A lo Pobre</h3>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Lomo vetado a lo pobre<span class="puntos"></span></div>
+          <div class="descripcion">Lomo 250 gr, papas naturales, cebolla caramelizada y 2 huevos</div>
+        </div>
+        <div class="precio">$14.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Bistec a lo pobre<span class="puntos"></span></div>
+          <div class="descripcion">Bistec 250 gr, papas naturales, cebolla caramelizada y 2 huevos</div>
+        </div>
+        <div class="precio">$14.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Pechuga a lo pobre<span class="puntos"></span></div>
+          <div class="descripcion">Pechuga a la plancha, papas fritas naturales, cebolla caramelizada y 2 huevos</div>
+        </div>
+        <div class="precio">$11.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Suprema ave a lo pobre<span class="puntos"></span></div>
+          <div class="descripcion">Pechuga a la plancha con champiñones y queso fundido, papas fritas naturales, cebolla caramelizada y 2 huevos</div>
+        </div>
+        <div class="precio">$14.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Reineta frita a lo pobre<span class="puntos"></span></div>
+          <div class="descripcion">Reineta del día, papas fritas naturales, cebolla caramelizada y 2 huevos</div>
+        </div>
+        <div class="precio">$13.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Merluza frita a lo pobre<span class="puntos"></span></div>
+          <div class="descripcion">Merluza del día, papas fritas naturales, cebolla caramelizada y 2 huevos</div>
+        </div>
+        <div class="precio">$10.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Carne mechada a lo pobre<span class="puntos"></span></div>
+          <div class="descripcion">Carne mechada, papas fritas naturales, cebolla caramelizada y 2 huevos</div>
+        </div>
+        <div class="precio">$14.900</div>
+      </div>
+    </section>
+
+    <!-- ESPECIALES -->
+    <section id="especiales" class="seccion">
+      <h3 class="seccion-titulo">Especiales</h3>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Lomo vetado<span class="puntos"></span></div>
+          <div class="descripcion">Lomo vetado 250 gr con dos agregados a elección</div>
+        </div>
+        <div class="precio">$14.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Bistec de vacuno<span class="puntos"></span></div>
+          <div class="descripcion">Bistec de vacuno 250 gr con dos agregados a elección</div>
+        </div>
+        <div class="precio">$13.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Pechuga a la plancha<span class="puntos"></span></div>
+          <div class="descripcion">Pechuga a la plancha con dos agregados a elección</div>
+        </div>
+        <div class="precio">$11.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Suprema ave<span class="puntos"></span></div>
+          <div class="descripcion">Pechuga a la plancha con salsa de champiñones y queso fundido, con dos agregados a elección</div>
+        </div>
+        <div class="precio">$12.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Reineta<span class="puntos"></span></div>
+          <div class="descripcion">Reineta del día frita o a la plancha, con dos agregados a elección</div>
+        </div>
+        <div class="precio">$12.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Merluza<span class="puntos"></span></div>
+          <div class="descripcion">Merluza del día frita, con dos agregados a elección</div>
+        </div>
+        <div class="precio">$10.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Panqueques de pollo / vegetariano<span class="puntos"></span></div>
+          <div class="descripcion">Creps rellenos de pollo o verduras del día, con queso fundido y salsa de champiñones</div>
+        </div>
+        <div class="precio">$13.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Carne mechada con puré y agregados<span class="puntos"></span></div>
+          <div class="descripcion">Carne mechada con puré casero y agregados a elección</div>
+        </div>
+        <div class="precio">$13.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Carne mechada, dos agregados<span class="puntos"></span></div>
+          <div class="descripcion">Carne mechada con dos agregados a elección</div>
+        </div>
+        <div class="precio">$13.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Lomo champiñón<span class="puntos"></span></div>
+          <div class="descripcion">Lomo con champiñones, puré y tomates cherry</div>
+        </div>
+        <div class="precio">$13.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Reineta con salsa de champiñones<span class="puntos"></span></div>
+          <div class="descripcion">Reineta con salsa de champiñones, puré y tomates cherry</div>
+        </div>
+        <div class="precio">$13.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Suprema de filete de pollo con queso fundido<span class="puntos"></span></div>
+          <div class="descripcion">Filete de pollo con queso fundido, papas fritas y ensalada chilena</div>
+        </div>
+        <div class="precio">$13.990</div>
+      </div>
+    </section>
+
+    <!-- CEVICHE -->
+    <section id="ceviche" class="seccion">
+      <h3 class="seccion-titulo">Ceviche</h3>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Ceviche de reineta<span class="puntos"></span></div>
+          <div class="descripcion">Reineta fresca marinada al limón con cebolla, cilantro y ají</div>
+        </div>
+        <div class="precio">$12.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Ceviche de reineta copa para dos<span class="puntos"></span></div>
+          <div class="descripcion">Porción generosa para compartir, presentada en copa</div>
+        </div>
+        <div class="precio">$16.900</div>
+      </div>
+    </section>
+
+    <!-- ENSALADAS -->
+    <section id="ensaladas" class="seccion">
+      <h3 class="seccion-titulo">Ensaladas</h3>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Ensalada césar con lomo de atún<span class="puntos"></span></div>
+          <div class="descripcion">Lechuga, crutones, parmesano y salsa césar con lomo de atún</div>
+        </div>
+        <div class="precio">$8.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Ensalada césar con filete de pollo<span class="puntos"></span></div>
+          <div class="descripcion">Lechuga, crutones, parmesano y salsa césar con filete de pollo</div>
+        </div>
+        <div class="precio">$8.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Ensalada Bandido<span class="puntos"></span></div>
+          <div class="descripcion">Lechuga hidropónica, queso de cabra, pechuga de pollo, aceitunas y salsa césar</div>
+        </div>
+        <div class="precio">$9.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Ensalada a la chilena con papa mayo<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$4.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Ensalada surtida extra<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$5.900</div>
+      </div>
+    </section>
+
+    <!-- PARA COMPARTIR -->
+    <section id="compartir" class="seccion">
+      <h3 class="seccion-titulo">Para Compartir</h3>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Chorrillana tradicional<span class="puntos"></span></div>
+          <div class="descripcion">Papas fritas, cebolla, carne, pollo, longaniza de Chillán y 3 huevos</div>
+        </div>
+        <div class="precio">$12.990</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Chorrillana vegetariana<span class="puntos"></span></div>
+          <div class="descripcion">Papas fritas, salsa de champiñón, choclo, champiñón, tomate, aceituna y salsa El Bandido</div>
+        </div>
+        <div class="precio">$11.990</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">La Bandida<span class="puntos"></span></div>
+          <div class="descripcion">Papas fritas, pollo, salsa de champiñón, queso y choclo</div>
+        </div>
+        <div class="precio">$11.990</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Prestige<span class="puntos"></span></div>
+          <div class="descripcion">Papas fritas, carne, pollo, queso cheddar, longaniza de Chillán y cebolla caramelizada</div>
+        </div>
+        <div class="precio">$11.990</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">El Bandido<span class="puntos"></span></div>
+          <div class="descripcion">Papas fritas, carne, salsa de champiñón, tocino y queso</div>
+        </div>
+        <div class="precio">$11.990</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Papas fritas<span class="puntos"></span></div>
+          <div class="descripcion">Para 3 o 4 personas</div>
+        </div>
+        <div class="precio">$5.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Salchipapas<span class="puntos"></span></div>
+          <div class="descripcion">Para 3 o 4 personas</div>
+        </div>
+        <div class="precio">$6.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Consomé XL<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$3.500</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Consomé tradicional<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$2.500</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Ensalada surtida chica<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$2.500</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Ensalada chilena extra<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$2.500</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Empanada de pino carne picada<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$3.000</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Empanada de pollo dos quesos<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$2.500</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Empanada de pollo champiñones<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$2.500</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Chaparrita<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$1.500</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Chaparrita napolitana<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$2.000</div>
+      </div>
+    </section>
+
+    <!-- POSTRES -->
+    <section id="postres" class="seccion">
+      <h3 class="seccion-titulo">Postres</h3>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Leche asada<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$3.500</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Panqueque celestino<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$3.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Panqueque celestino con helado<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$4.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Copa helado<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$4.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Copa helado XL<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$5.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Mix dulces de la casa<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$4.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Torta del día<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$5.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Milkshake manjar<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$4.500</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Milkshake arándano<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$4.500</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Milkshake Oreo<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$4.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Milkshake Bandido<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$4.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Café crema helado<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$4.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Milkshake frutilla<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$4.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Gelatinas<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$500</div>
+      </div>
+    </section>
+
+    <!-- BEBESTIBLES -->
+    <section id="bebestibles" class="seccion">
+      <h3 class="seccion-titulo">Bebestibles</h3>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Agua c/sn gas<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$2.000</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Bebidas express<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$2.000</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Bebida en lata<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$2.500</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Té o café instantáneo<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$2.000</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Infusión<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$2.000</div>
+      </div>
+    </section>
+
+    <!-- JUGOS NATURALES -->
+    <section id="jugos" class="seccion">
+      <h3 class="seccion-titulo">Jugos Naturales</h3>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Piña<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$3.000</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Arándano<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$3.000</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Frutilla<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$3.000</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Naranja plátano<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$3.000</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Naranja y zanahoria<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$3.000</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Frutos rojos<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$3.000</div>
+      </div>
+    </section>
+
+    <!-- LIMONADAS -->
+    <section id="limonadas" class="seccion">
+      <h3 class="seccion-titulo">Limonadas</h3>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Limonada de arándano<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$3.000</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Limonada de frutilla<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$3.000</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Limonada de menta y limón<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$3.000</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Limonada tradicional<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$3.000</div>
+      </div>
+    </section>
+
+    <!-- CERVEZAS -->
+    <section id="cervezas" class="seccion">
+      <h3 class="seccion-titulo">Cervezas</h3>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Shop artesanal<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$4.000</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Shop promo 2X<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$7.000</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Corona 333cc<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$4.000</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Austral calafate<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$4.500</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Kutsmann<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$4.500</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Micheladas adicional<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$1.000</div>
+      </div>
+    </section>
+
+    <!-- COCTELERÍA -->
+    <section id="cocteleria" class="seccion">
+      <h3 class="seccion-titulo">Coctelería</h3>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Tropical gin<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$6.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Mojito sabores<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$6.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Mojito Cubans<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$5.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Tom Collin<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$6.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Piña colada<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$6.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Margarita<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$5.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Terremoto<span class="puntos"></span></div>
+          <div class="descripcion">xl</div>
+        </div>
+        <div class="precio">$6.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Jarra borgoña<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$14.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Cosmopolitan<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$6.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Pink gin tonic<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$7.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Strawberry margarita<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$7.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Orgasmo<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$6.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Daiquiri<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$6.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Arándano colado<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$6.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Negroni<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$6.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Moscow mule<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$7.900</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Ramazzoti<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$6.500</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Aperol<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$6.500</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Copa de borgoña<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$5.000</div>
+      </div>
+      <div class="plato">
+        <div class="info">
+          <div class="nombre">Vino individual<span class="puntos"></span></div>
+        </div>
+        <div class="precio">$3.500</div>
+      </div>
+    </section>
+
+    <div class="pie">
+      <p>¡Buen provecho!</p>
+      <p class="pie__direccion">
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Manuel+Antonio+Matta+666+La+Serena+Chile" target="_blank" rel="noopener">Manuel Antonio Matta 666 · La Serena</a>
+      </p>
+    </div>
+  </main>
+
+  <!-- Modal Reservas -->
+  <div class="modal-reservas" id="modalReservas" role="dialog" aria-modal="true" aria-label="Reservas y ubicación">
+    <div class="modal-reservas__caja">
+      <button type="button" class="modal-reservas__cerrar" id="cerrarReservas" aria-label="Cerrar Reservas">&#10005;</button>
+      <h3 class="seccion-titulo">Reservas</h3>
+      <div class="reserva__mapa">
+        <iframe
+          src="https://www.google.com/maps?q=Manuel+Antonio+Matta+666+La+Serena+Chile&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+          title="Ubicación de El Bandido"
+        ></iframe>
+      </div>
+      <div class="reserva__info">
+        <p class="reserva__horario-titulo">Horario de Atención</p>
+        <p class="reserva__horario">08:00 �?" 19:00 hrs</p>
+        <p class="reserva__dir">Manuel Antonio Matta 666 · Centro histórico, La Serena</p>
+        <button type="button" class="boton-reservar" id="abrirFormReserva">Reservar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Formulario de Reserva -->
+  <div class="modal-reservas" id="modalReservaForm" role="dialog" aria-modal="true" aria-label="Formulario de reserva">
+    <div class="modal-reservas__caja">
+      <button type="button" class="modal-reservas__cerrar" id="cerrarFormReserva" aria-label="Cerrar formulario">&#10005;</button>
+      <h3 class="seccion-titulo">Reserva de Mesa</h3>
+
+      <form class="reserva-form" id="formReserva" novalidate>
+        <div class="campo">
+          <label for="resNombre">Nombre</label>
+          <input id="resNombre" type="text" name="nombre" placeholder="Tu nombre" required />
+        </div>
+        <div class="reserva-form__fila">
+          <div class="campo">
+            <label for="resPersonas">Personas</label>
+            <select id="resPersonas" name="personas" required>
+              <option value="">Elegir</option>
+              <option>1</option><option>2</option><option>3</option>
+              <option>4</option><option>5</option><option>6</option>
+              <option>7</option><option>8</option><option>9</option>
+              <option>10</option><option>11</option><option>12</option>
+              <option>13</option><option>14</option><option>15</option>
+              <option>16</option><option>17</option><option>18</option>
+              <option>19</option><option>20</option><option>21</option>
+              <option>22</option><option>23</option><option>24</option>
+              <option>25</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="resHora">Hora de la reserva</label>
+            <input id="resHora" type="time" name="hora" required />
+          </div>
+        </div>
+        <div class="reserva-form__fila">
+          <div class="campo">
+            <label for="resFecha">Fecha</label>
+            <input id="resFecha" type="date" name="fecha" required />
+          </div>
+          <div class="campo">
+            <label for="resTel">Teléfono</label>
+            <input id="resTel" type="tel" name="telefono" placeholder="+56 9 ..." />
+          </div>
+        </div>
+        <button type="submit" class="boton-reservar">Confirmar Reserva</button>
+      </form>
+
+      <div class="reserva-exito" id="reservaExito" hidden>
+        <p class="reserva__horario">¡Almosto listo!</p>
+        <p class="reserva__dir">Te abrimos WhatsApp con tu solicitud. Solo presiona enviar y te confirmaremos tu mesa.</p>
+        <a class="boton-reservar boton-reservar--enlace" id="enlaceWhatsapp" href="#" target="_blank" rel="noopener">Abrir WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const header = document.querySelector('.header');
+    const secciones = Array.from(document.querySelectorAll('.seccion[id]'));
+    const seccionActual = document.getElementById('seccionActual');
+    let ticking = false;
+
+    function actualizarHeader() {
+      header.classList.toggle('header--compacto', window.scrollY > 70);
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(actualizarHeader);
+      }
+    }, { passive: true });
+
+    window.addEventListener('resize', actualizarHeader, { passive: true });
+    actualizarHeader();
+
+    function nombreSeccion(seccion) {
+      if (seccion.id === 'inicio') return 'Inicio';
+      const titulo = seccion.querySelector('.seccion-titulo');
+      return titulo ? titulo.textContent.trim() : '';
+    }
+
+    const enlacesNav = Array.from(document.querySelectorAll('.header__nav a'));
+
+    function marcarNav(seccion) {
+      const directo = enlacesNav.find((a) => a.getAttribute('href') === '#' + seccion.id);
+      const destino = directo || enlacesNav.find((a) => a.getAttribute('href') === '#bebestibles');
+      enlacesNav.forEach((a) => a.classList.remove('nav-activo'));
+      if (destino) destino.classList.add('nav-activo');
+    }
+
+    function mostrarSeccion(seccion) {
+      marcarNav(seccion);
+      const nombre = nombreSeccion(seccion);
+      if (!nombre || nombre === seccionActual.textContent) return;
+      seccionActual.classList.add('header__actual--cambia');
+      setTimeout(() => {
+        seccionActual.textContent = nombre;
+        seccionActual.classList.remove('header__actual--cambia');
+      }, 180);
+    }
+
+    const observador = new IntersectionObserver((entradas) => {
+      entradas.forEach((entrada) => {
+        if (entrada.isIntersecting) {
+          secciones.forEach((seccion) => seccion.classList.remove('seccion--activa'));
+          entrada.target.classList.add('seccion--activa');
+          mostrarSeccion(entrada.target);
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+    secciones.forEach((seccion) => observador.observe(seccion));
+    if (secciones[0]) {
+      secciones[0].classList.add('seccion--activa');
+      seccionActual.textContent = nombreSeccion(secciones[0]);
+      marcarNav(secciones[0]);
+    }
+
+    const modal = document.getElementById('modalReservas');
+    const modalForm = document.getElementById('modalReservaForm');
+    const botonAbrir = document.getElementById('abrirReservas');
+    const botonCerrar = document.getElementById('cerrarReservas');
+    const botonAbrirForm = document.getElementById('abrirFormReserva');
+    const botonCerrarForm = document.getElementById('cerrarFormReserva');
+    const formReserva = document.getElementById('formReserva');
+    const reservaExito = document.getElementById('reservaExito');
+
+    function bloquearScroll() { document.body.style.overflow = 'hidden'; }
+    function liberarScroll() { document.body.style.overflow = ''; }
+
+    function abrirModal() {
+      modal.classList.add('modal-reservas--abierto');
+      bloquearScroll();
+    }
+
+    function cerrarModal() {
+      modal.classList.remove('modal-reservas--abierto');
+      if (!modalForm.classList.contains('modal-reservas--abierto')) liberarScroll();
+    }
+
+    botonAbrir.addEventListener('click', (e) => {
+      e.preventDefault();
+      abrirModal();
+    });
+
+    botonCerrar.addEventListener('click', cerrarModal);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) cerrarModal();
+    });
+
+    botonAbrirForm.addEventListener('click', () => {
+      formReserva.hidden = false;
+      reservaExito.hidden = true;
+      modalForm.classList.add('modal-reservas--abierto');
+      bloquearScroll();
+    });
+
+    botonCerrarForm.addEventListener('click', () => {
+      modalForm.classList.remove('modal-reservas--abierto');
+      liberarScroll();
+    });
+
+    modalForm.addEventListener('click', (e) => {
+      if (e.target === modalForm) {
+        modalForm.classList.remove('modal-reservas--abierto');
+        liberarScroll();
+      }
+    });
+
+    const enlaceWhatsapp = document.getElementById('enlaceWhatsapp');
+
+    formReserva.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!formReserva.checkValidity()) {
+        formReserva.reportValidity();
+        return;
+      }
+
+      const datos = new FormData(formReserva);
+      const nombre = String(datos.get('nombre') || '').trim();
+      const personas = String(datos.get('personas') || '');
+      const fecha = String(datos.get('fecha') || '');
+      const hora = String(datos.get('hora') || '');
+
+      let fechaBonita = fecha;
+      if (fecha) {
+        const partes = fecha.split('-');
+        fechaBonita = `${partes[2]}/${partes[1]}/${partes[0]}`;
+      }
+
+      const mensaje = `Hola buen día, me gustaría hacer una reserva de ${personas} personas, `
+        + `para el ${fechaBonita} a las ${hora}, a nombre de ${nombre}.`;
+
+      const url = 'https://wa.me/56990952500?text=' + encodeURIComponent(mensaje);
+
+      formReserva.hidden = true;
+      reservaExito.hidden = false;
+      enlaceWhatsapp.href = url;
+      window.open(url, '_blank');
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (modalForm.classList.contains('modal-reservas--abierto')) {
+          modalForm.classList.remove('modal-reservas--abierto');
+          liberarScroll();
+        } else if (modal.classList.contains('modal-reservas--abierto')) {
+          cerrarModal();
+        }
+      }
+    });
+  </script>
+</body>
+</html>
